@@ -5,6 +5,10 @@ import getopt
 import sys
 
 
+def usage():
+    print("usage: setup.py [-h, --help]")
+
+
 def main(argv=sys.argv):
     exit_code = 0
 
