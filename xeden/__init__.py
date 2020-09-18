@@ -18,3 +18,6 @@ __url__ = ""
 
 __author__ = "Constantin Dullo"
 __email__ = "constantin.dullo@gmail.com"
+
+__license__ = "MIT License"
+__copyright__ = "Copyright 2020-present Constantin Dullo"
