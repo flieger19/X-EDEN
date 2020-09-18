@@ -15,3 +15,6 @@ __description__ = (
 )
 
 __url__ = ""
+
+__author__ = "Constantin Dullo"
+__email__ = "constantin.dullo@gmail.com"
