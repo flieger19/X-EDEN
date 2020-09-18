@@ -13,3 +13,5 @@ __description__ = (
     "Embedded Development for Xcode"
     "CMSIS, HAL, FreeRTOS, STM32Cube, ARM, STMicroelectronics (STM32)"
 )
+
+__url__ = ""
