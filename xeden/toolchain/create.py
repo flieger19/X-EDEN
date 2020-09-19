@@ -55,3 +55,28 @@ def create():
     """
     Creates X-EDEN Xcode toolchain
     """
+    # gen tool chain
+    usr_directory = "usr/"
+    directory_maker(XEDEN_TOOL + usr_directory)
+
+    # copy plist file
+    info_file = "/Info.plist"
+    source = CURRENT_DIR + info_file
+    target = XEDEN_TOOL + info_file
+    try:
+        shutil.copyfile(source, target)
+    except IOError as error:
+        print("Unable to copy file. %s" % error)
+    except:
+        print("Unexpected error:", sys.exc_info())
+
+    # symlink
+    directory_iterator(os.fsencode(DEFAULT_TOOL + usr_directory), os.fsencode(XEDEN_TOOL + usr_directory))
+
+    # symlink lld
+    source_lld = "/usr/local/opt/arm-none-eabi-llvm/bin/lld"
+    target_lld = "usr/bin/ld.lld"
+    try:
+        os.symlink(source_lld, XEDEN_TOOL + target_lld)
+    except:
+        print("Symlink Error")
