@@ -6,14 +6,14 @@ import sys
 
 
 def usage():
-    print("usage: setup.py [-h, --help]")
+    print("usage: setup.py [-h, -t, --help, --tool]")
 
 
 def main(argv=sys.argv):
     exit_code = 0
 
     try:
-        opts, args = getopt.getopt(argv, "h", ["help"])
+        opts, args = getopt.getopt(argv, "ht", ["help", "tool"])
     except getopt.GetoptError as error:
         # print help information and exit:
         print(error)  # will print something like "option -a not recognized"
@@ -24,6 +24,11 @@ def main(argv=sys.argv):
         if opt in ("-h", "--help"):
             usage()
             return exit_code
+        elif opt in ("-t", "--tool"):
+            # implementation
+            return exit_code
+        else:
+            assert False, "unhandled option"
 
     return exit_code
 
