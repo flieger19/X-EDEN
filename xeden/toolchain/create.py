@@ -7,7 +7,8 @@ import os
 import shutil
 
 DEFAULT_TOOL = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/"
-XEDEN_TOOL = os.path.expanduser('~') + "/Library/Developer/Toolchains/X-EDEN.xctoolchain/"
+TOOLCHAINS_DIR = os.path.expanduser('~') + "/Library/Developer/Toolchains/"
+XEDEN_TOOL = "X-EDEN.xctoolchain/"
 CURRENT_DIR = os.path.abspath(os.getcwd())
 
 
@@ -57,13 +58,13 @@ def create():
     """
     # gen tool chain
     usr_directory = "usr/"
-    directory_maker(XEDEN_TOOL + usr_directory)
+    directory_maker(TOOLCHAINS_DIR + XEDEN_TOOL + usr_directory)
 
     # copy plist file
     info_file = "/Info.plist"
     toolchain_directory = "toolchain"
     source = CURRENT_DIR + toolchain_directory + info_file
-    target = XEDEN_TOOL + info_file
+    target = TOOLCHAINS_DIR + XEDEN_TOOL + info_file
     try:
         shutil.copyfile(source, target)
     except IOError as error:
@@ -72,12 +73,12 @@ def create():
         print("Unexpected error:", sys.exc_info())
 
     # symlink
-    directory_iterator(os.fsencode(DEFAULT_TOOL + usr_directory), os.fsencode(XEDEN_TOOL + usr_directory))
+    directory_iterator(os.fsencode(DEFAULT_TOOL + usr_directory), os.fsencode(TOOLCHAINS_DIR + XEDEN_TOOL + usr_directory))
 
     # symlink lld
     source_lld = "/usr/local/opt/arm-none-eabi-llvm/bin/lld"
     target_lld = "usr/bin/ld.lld"
     try:
-        os.symlink(source_lld, XEDEN_TOOL + target_lld)
+        os.symlink(source_lld, TOOLCHAINS_DIR + XEDEN_TOOL + target_lld)
     except:
         print("Symlink Error")
