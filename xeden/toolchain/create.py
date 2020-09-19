@@ -20,3 +20,11 @@ def directory_maker(path):
         os.makedirs(path)
     except OSError:
         print("Creation of the directory %s failed" % path)
+
+
+def directory_iterator(source, target):
+    """
+    Iterates through a directory and symlinks all containing files in a target director with the same structure
+    :param source: Directory to iterate through
+    :param target: Directory to symlink files to
+    """
