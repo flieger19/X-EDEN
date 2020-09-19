@@ -61,7 +61,8 @@ def create():
 
     # copy plist file
     info_file = "/Info.plist"
-    source = CURRENT_DIR + info_file
+    toolchain_directory = "toolchain"
+    source = CURRENT_DIR + toolchain_directory + info_file
     target = XEDEN_TOOL + info_file
     try:
         shutil.copyfile(source, target)
