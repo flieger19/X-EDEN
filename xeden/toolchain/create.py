@@ -49,3 +49,9 @@ def directory_iterator(source, target):
             continue
         else:
             print("Special file ", path_source)
+
+
+def create():
+    """
+    Creates X-EDEN Xcode toolchain
+    """
