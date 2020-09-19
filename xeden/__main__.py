@@ -4,6 +4,8 @@ Documentation
 import getopt
 import sys
 
+import toolchain.create as toolchain
+
 
 def usage():
     print("usage: setup.py [-h, -t, --help, --tool]")
@@ -25,10 +27,12 @@ def main(argv=sys.argv):
             usage()
             return exit_code
         elif opt in ("-t", "--tool"):
-            # implementation
+            toolchain.create()
             return exit_code
         else:
             assert False, "unhandled option"
+
+    toolchain.create()
 
     return exit_code
 
