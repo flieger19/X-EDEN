@@ -62,7 +62,7 @@ def create():
 
     # copy plist file
     info_file = "/Info.plist"
-    toolchain_directory = "toolchain"
+    toolchain_directory = "/toolchain"
     source = CURRENT_DIR + toolchain_directory + info_file
     target = TOOLCHAINS_DIR + XEDEN_TOOL + info_file
     try:
