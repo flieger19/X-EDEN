@@ -76,8 +76,10 @@ def create():
     directory_iterator(os.fsencode(DEFAULT_TOOL + usr_directory), os.fsencode(TOOLCHAINS_DIR + XEDEN_TOOL + usr_directory))
 
     # symlink lld
+    sbin_directory = "usr/sbin/"
+    directory_maker(TOOLCHAINS_DIR + XEDEN_TOOL + sbin_directory)
     source_lld = "/usr/local/opt/arm-none-eabi-llvm/bin/lld"
-    target_lld = "usr/bin/ld.lld"
+    target_lld = sbin_directory + "ld.lld"
     try:
         os.symlink(source_lld, TOOLCHAINS_DIR + XEDEN_TOOL + target_lld)
     except:
