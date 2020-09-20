@@ -1,3 +1,19 @@
 #!/bin/zsh
 
-${HOME}/Library/Developer/Toolchains/X-EDEN.xctoolchain/usr/sbin/ld.lld $@
+arguments=""
+filelist=""
+is_filelist=false
+
+for arg;
+do
+  if $is_filelist; then
+    filelist=$arg
+    is_filelist=false
+  elif [ "$arg" = "-filelist" ]; then
+    is_filelist=true
+  else
+    arguments="$arguments $arg"
+  fi
+done
+
+${HOME}/Library/Developer/Toolchains/X-EDEN.xctoolchain/usr/sbin/ld.lld "$arguments"
