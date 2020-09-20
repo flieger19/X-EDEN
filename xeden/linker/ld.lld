@@ -16,4 +16,13 @@ do
   fi
 done
 
-${HOME}/Library/Developer/Toolchains/X-EDEN.xctoolchain/usr/sbin/ld.lld "$arguments"
+objects=""
+directory=""
+project_directory="$(pwd)"
+
+while read line; do
+    objects="$objects $(basename "$line")"
+    directory="$(dirname "$line")"
+done < "$filelist"
+
+${HOME}/Library/Developer/Toolchains/X-EDEN.xctoolchain/usr/sbin/ld.lld $objects $arguments
