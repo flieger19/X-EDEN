@@ -1,11 +1,13 @@
 #!/bin/zsh
 
-arguments=""
+declare -a arguments
 filelist=""
 dependency_info=""
+object_path_lto=""
 is_filelist=false
 is_no_deduplicate=false
 is_dependency_info=false
+is_object_path_lto=false
 
 for arg;
 do
@@ -17,29 +19,33 @@ do
   elif $is_dependency_info; then
     dependency_info=$arg
     is_dependency_info=false
+  elif $is_object_path_lto; then
+    object_path_lto=$arg
+    is_object_path_lto=false
   elif [ "$arg" = "-filelist" ]; then
     is_filelist=true
   elif [ "$arg" = "-no_deduplicate" ]; then
     is_no_deduplicate=false
   elif [ "$arg" = "-dependency_info" ]; then
     is_dependency_info=true
+  elif [ "$arg" = "-object_path_lto" ]; then
+    is_object_path_lto=true
   else
-    arguments="$arguments $arg"
+    arguments+=($arg)
   fi
 done
 
-objects=""
+declare -a objects
 directory=""
 project_directory="$(pwd)"
 
 while read line; do
-    objects="$objects $(basename "$line")"
+    objects+=($(basename "$line"))
     directory="$(dirname "$line")"
 done < "$filelist"
 
 cd $directory
-command="${HOME}/Library/Developer/Toolchains/X-EDEN.xctoolchain/usr/sbin/ld.lld $objects $arguments"
-$command
+${HOME}/Library/Developer/Toolchains/X-EDEN.xctoolchain/usr/sbin/ld.lld $objects $arguments
 exit_code=$?
 cd $project_directory
 
