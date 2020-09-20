@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+${HOME}/Library/Developer/Toolchains/X-EDEN.xctoolchain/usr/sbin/ld.lld $@
