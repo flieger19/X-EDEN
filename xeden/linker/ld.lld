@@ -25,4 +25,10 @@ while read line; do
     directory="$(dirname "$line")"
 done < "$filelist"
 
-${HOME}/Library/Developer/Toolchains/X-EDEN.xctoolchain/usr/sbin/ld.lld $objects $arguments
+cd $directory
+command="${HOME}/Library/Developer/Toolchains/X-EDEN.xctoolchain/usr/sbin/ld.lld $objects $arguments"
+$command
+exit_code=$?
+cd $project_directory
+
+exit $exit_code
