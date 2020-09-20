@@ -20,7 +20,7 @@ do
   elif [ "$arg" = "-filelist" ]; then
     is_filelist=true
   elif [ "$arg" = "-no_deduplicate" ]; then
-    is_no_deduplicate=true
+    is_no_deduplicate=false
   elif [ "$arg" = "-dependency_info" ]; then
     is_dependency_info=true
   else
