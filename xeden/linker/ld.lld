@@ -3,14 +3,19 @@
 arguments=""
 filelist=""
 is_filelist=false
+is_no_deduplicate=false
 
 for arg;
 do
   if $is_filelist; then
     filelist=$arg
     is_filelist=false
+  elif $is_no_deduplicate; then
+    is_no_deduplicate=false
   elif [ "$arg" = "-filelist" ]; then
     is_filelist=true
+  elif [ "$arg" = "-no_deduplicate" ]; then
+    is_no_deduplicate=true
   else
     arguments="$arguments $arg"
   fi
