@@ -84,3 +84,13 @@ def create():
         os.symlink(source_lld, TOOLCHAINS_DIR + XEDEN_TOOL + target_lld)
     except:
         print("Symlink Error")
+
+    # copy linker adaptor
+    source_linker = "/linker/ld.lld"
+    target_linker = "usr/bin/ld.lld"
+    try:
+        shutil.copyfile(CURRENT_DIR + source_linker, TOOLCHAINS_DIR + XEDEN_TOOL + target_linker)
+    except IOError as error:
+        print("Unable to copy file. %s" % error)
+    except:
+        print("Unexpected error:", sys.exc_info())
