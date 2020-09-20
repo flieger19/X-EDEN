@@ -2,8 +2,10 @@
 
 arguments=""
 filelist=""
+dependency_info=""
 is_filelist=false
 is_no_deduplicate=false
+is_dependency_info=false
 
 for arg;
 do
@@ -12,10 +14,15 @@ do
     is_filelist=false
   elif $is_no_deduplicate; then
     is_no_deduplicate=false
+  elif $is_dependency_info; then
+    dependency_info=$arg
+    is_dependency_info=false
   elif [ "$arg" = "-filelist" ]; then
     is_filelist=true
   elif [ "$arg" = "-no_deduplicate" ]; then
     is_no_deduplicate=true
+  elif [ "$arg" = "-dependency_info" ]; then
+    is_dependency_info=true
   else
     arguments="$arguments $arg"
   fi
