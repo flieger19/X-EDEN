@@ -36,17 +36,12 @@ do
 done
 
 declare -a objects
-directory=""
-project_directory="$(pwd)"
 
 while read line; do
-    objects+=($(basename "$line"))
-    directory="$(dirname "$line")"
+  objects+=($line)
 done < "$filelist"
 
-cd $directory
 ${HOME}/Library/Developer/Toolchains/X-EDEN.xctoolchain/usr/sbin/ld.lld $objects $arguments
 exit_code=$?
-cd $project_directory
 
 exit $exit_code
