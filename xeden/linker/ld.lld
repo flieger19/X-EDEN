@@ -37,9 +37,11 @@ done
 
 declare -a objects
 
-while read line; do
-  objects+=($line)
-done < "$filelist"
+if [ "$filelist" != "" ]; then
+  while read line; do
+    objects+=($line)
+  done < "$filelist"
+fi
 
 ${HOME}/Library/Developer/Toolchains/X-EDEN.xctoolchain/usr/sbin/ld.lld $objects $arguments
 exit_code=$?
