@@ -85,6 +85,17 @@ def create():
     except:
         print("Symlink Error")
 
+    # symlink additional llvm tools
+    bin_directory = "usr/bin/"
+    directory_maker(TOOLCHAINS_DIR + XEDEN_TOOL + sbin_directory)
+    source_path = "/usr/local/opt/arm-none-eabi-llvm/bin/"
+    source_llvm_tools = ["llvm-size", "llvm-objcopy"]
+    for source_llvm_tool in source_llvm_tools:
+        try:
+            os.symlink(source_path + source_llvm_tool, TOOLCHAINS_DIR + XEDEN_TOOL + bin_directory + source_llvm_tool)
+        except:
+            print("Symlink Error")
+
     # copy linker adaptor
     source_linker = "/linker/ld.lld"
     target_linker = "usr/bin/ld.lld"
