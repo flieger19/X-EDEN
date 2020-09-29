@@ -1,0 +1,49 @@
+#!/bin/zsh
+
+declare -a arguments
+filelist=""
+dependency_info=""
+object_path_lto=""
+is_filelist=false
+is_no_deduplicate=false
+is_dependency_info=false
+is_object_path_lto=false
+
+for arg;
+do
+  if $is_filelist; then
+    filelist=$arg
+    is_filelist=false
+  elif $is_no_deduplicate; then
+    is_no_deduplicate=false
+  elif $is_dependency_info; then
+    dependency_info=$arg
+    is_dependency_info=false
+  elif $is_object_path_lto; then
+    object_path_lto=$arg
+    is_object_path_lto=false
+  elif [ "$arg" = "-filelist" ]; then
+    is_filelist=true
+  elif [ "$arg" = "-no_deduplicate" ]; then
+    is_no_deduplicate=false
+  elif [ "$arg" = "-dependency_info" ]; then
+    is_dependency_info=true
+  elif [ "$arg" = "-object_path_lto" ]; then
+    is_object_path_lto=true
+  else
+    arguments+=($arg)
+  fi
+done
+
+declare -a objects
+
+if [ "$filelist" != "" ]; then
+  while read line; do
+    objects+=($line)
+  done < "$filelist"
+fi
+
+${HOME}/Library/Developer/Toolchains/X-EDEN.xctoolchain/usr/sbin/ld.lld $objects $arguments
+exit_code=$?
+
+exit $exit_code
