@@ -97,7 +97,7 @@ def create():
             print("Symlink Error")
 
     # copy linker adaptor
-    source_linker = "/linker/ld.lld"
+    source_linker = "/xeden/linker/ld.lld"
     target_linker = "usr/bin/ld.lld"
     try:
         shutil.copyfile(CURRENT_DIR + source_linker, TOOLCHAINS_DIR + XEDEN_TOOL + target_linker)
