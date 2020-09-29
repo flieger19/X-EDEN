@@ -6,6 +6,8 @@ Documentation, License etc.
 import sys
 import subprocess
 
+import xeden.__main__ as xeden
+
 
 def ensure_installed(tool):
     """
@@ -32,6 +34,8 @@ def main(argv=sys.argv):
     tools = ['lld', 'llvm-objcopy', 'llvm-size']
     for tool in tools:
         model[tool] = ensure_installed(tool)
+
+    exit_code = xeden.main(argv)
 
     return exit_code
 
